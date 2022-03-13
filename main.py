@@ -80,12 +80,19 @@ def main():
   token = random.randint(0, 3)
   playAgain = True
   def askPlayAgain():
-    ask = input("Play again? Enter Y for yes and N for no)")
+    ask = input("Play again? Enter Y for yes and N for no")
+    if (ask == 'Y'):
+      pass
+
+    if (ask == 'N'):
+      print("Thanks for playing!")
+      quit()
   if (token == 0):
     print("\n")
     print("\n")
     unicorn_draw(.5)
     print("\n")
+    askPlayAgain()
     
 
   elif (token == 1):
@@ -93,19 +100,21 @@ def main():
     print("\n")
     horse_draw(.5)
     print("\n")
+    askPlayAgain()
 
   elif (token == 2):
     print("\n")
     print("\n")
     zebra_draw(.5)
     print("\n")
+    askPlayAgain()
 
   elif (token == 3):
     print("\n")
     print("\n")
     donkey_draw(.5)
     print("\n")
-    
+    askPlayAgain()
 
 while numberOfPlays > 0:
   main()
