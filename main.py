@@ -3,6 +3,7 @@ import time
 import random
 
 
+
 def loading_screen(seconds):
     screens = open("Screen.txt", 'r')
     for lines in screens:
@@ -47,6 +48,8 @@ print("-----------------------\n")
 
 #1. Users pay an initial amount at the start of the game.
 token = None
+moneyEarnt = 0
+moneyValues = [0, 0.5, 5]
 
 
 def numberCheck(question, low, high):
@@ -78,20 +81,23 @@ numberOfPlays = int(numberCheck("How much rounds? ($1 per round) \nYou may play 
 def main():
   global token
   token = random.randint(0, 3)
-  playAgain = True
+
   def askPlayAgain():
+    #5.  The game should allow players to continue / quit... 
     ask = input("Play again? Enter Y for yes and N for no")
     if (ask == 'Y'):
       pass
 
-    if (ask == 'N'):
+    elif (ask == 'N'):
       print("Thanks for playing!")
       quit()
+
   if (token == 0):
     print("\n")
     print("\n")
     unicorn_draw(.5)
     print("\n")
+    print("You won {}!".format(moneyValues[2]))
     askPlayAgain()
     
 
@@ -100,6 +106,7 @@ def main():
     print("\n")
     horse_draw(.5)
     print("\n")
+    print("You won {}!".format(moneyValues[1]))
     askPlayAgain()
 
   elif (token == 2):
@@ -107,6 +114,7 @@ def main():
     print("\n")
     zebra_draw(.5)
     print("\n")
+    print("You won {}!".format(moneyValues[1]))
     askPlayAgain()
 
   elif (token == 3):
@@ -114,8 +122,10 @@ def main():
     print("\n")
     donkey_draw(.5)
     print("\n")
+    print("Unfortunately, you didn't get anything. Better luck next time!")
     askPlayAgain()
-
+    
+ #...provided they have not lost all of their money.
 while numberOfPlays > 0:
   main()
   numberOfPlays -= 1
@@ -129,7 +139,7 @@ while numberOfPlays > 0:
 #ii. if it is a zebra or horse, they win 50c
 #iii.  if it is a donkey then they don’t win anything.
  
-#5.  The game should allow players to continue / quit provided they have not lost all of their money. 
+
 #6. It should supply appropriate feedback so that the user knows how much money they have won / lost each round and how much money they have left.
 #7. Once students have no more money, the game should end (although players do have the option of quitting while they are ahead) 
 
