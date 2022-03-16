@@ -3,7 +3,7 @@ import time
 import random
 
 
-
+#Defines the loading screen and ASCII draw functions
 def loading_screen(seconds):
     screens = open("Screen.txt", 'r')
     for lines in screens:
@@ -39,7 +39,11 @@ def donkey_draw(seconds):
     print(lines, end='')
     time.sleep(seconds)
   screens.close
-#Main Code Start
+
+
+
+
+
 os.system('cls' if os.name == 'nt' else 'clear')
 loading_screen(.35)
 print("\n")
@@ -49,7 +53,7 @@ print("-----------------------\n")
 #1. Users pay an initial amount at the start of the game.
 token = None
 moneyEarnt = 0
-moneyValues = [0, 0.5, 5]
+moneyValues = [5, 0.5, 0]
 
 
 def numberCheck(question, low, high):
@@ -78,13 +82,16 @@ def numberCheck(question, low, high):
 #2. The cost should be $1 per round and users should press <enter> to play.  The computer should then generate a token that is either a zebra, horse, donkey or unicorn.
 numberOfPlays = int(numberCheck("How much rounds? ($1 per round) \nYou may play up to 10 rounds. Enter number and press <enter>: \n", 1, 10))
 
+
+
 def main():
   global token
   token = random.randint(0, 3)
+  
 
   def askPlayAgain():
     #5.  The game should allow players to continue / quit... 
-    ask = input("Play again? Enter Y for yes and N for no")
+    ask = input("Play again? Enter Y for yes and N for no: ")
     if (ask == 'Y'):
       pass
 
@@ -92,37 +99,57 @@ def main():
       print("Thanks for playing!")
       quit()
 
+
+  #a. This should be displayed to the user.  
+  #b. DECISION:
   if (token == 0):
+  #i. If the token is a unicorn, the user wins $5,  
     print("\n")
     print("\n")
     unicorn_draw(.5)
     print("\n")
-    print("You won {}!".format(moneyValues[2]))
+    #6. It should supply appropriate feedback so that the user knows how much money they have won / lost each round and how much money they have left.
+    global moneyEarnt
+    moneyEarnt = moneyEarnt + moneyValues[token]
+    print("You won ${}!".format(moneyValues[token]))
+    print("\nYou now have {}".format(moneyEarnt))
     askPlayAgain()
     
 
   elif (token == 1):
+    #ii. if it is a zebra 
     print("\n")
     print("\n")
     horse_draw(.5)
     print("\n")
-    print("You won {}!".format(moneyValues[1]))
+     
+    moneyEarnt = moneyEarnt + moneyValues[token]
+    print("You won ${}!".format(moneyValues[token]))
+    print("\nYou have won ${} so far.".format(moneyEarnt))
     askPlayAgain()
 
   elif (token == 2):
+    #or horse, they win 50c
     print("\n")
     print("\n")
     zebra_draw(.5)
     print("\n")
-    print("You won {}!".format(moneyValues[1]))
+     
+    moneyEarnt  = moneyEarnt + moneyValues[1]
+    print("You won ${}!".format(moneyValues[1]))
+    print("\nYou have won ${} so far.".format(moneyEarnt))
     askPlayAgain()
 
   elif (token == 3):
+    #iii.  if it is a donkey then they don’t win anything.
     print("\n")
     print("\n")
-    donkey_draw(.5)
+    donkey_draw(.3)
     print("\n")
+     
+    moneyEarnt = moneyEarnt + moneyValues[2]
     print("Unfortunately, you didn't get anything. Better luck next time!")
+    print("\nYou have won ${} so far.".format(moneyEarnt))
     askPlayAgain()
     
  #...provided they have not lost all of their money.
@@ -133,13 +160,12 @@ while numberOfPlays > 0:
   
 
 
-#a. This should be displayed to the user.  
-#b. DECISION:
-#i. If the token is a unicorn, the user wins $5, 
-#ii. if it is a zebra or horse, they win 50c
-#iii.  if it is a donkey then they don’t win anything.
+
  
 
-#6. It should supply appropriate feedback so that the user knows how much money they have won / lost each round and how much money they have left.
+
+ 
+
+
 #7. Once students have no more money, the game should end (although players do have the option of quitting while they are ahead) 
 
