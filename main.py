@@ -94,7 +94,7 @@ def main():
     ask = input("Play again? Enter Y for yes and N for no: ")
     if (ask == 'Y'):
       pass
-
+ #(although players do have the option of quitting while they are ahead)
     elif (ask == 'N'):
       print("Thanks for playing!")
       quit()
@@ -108,7 +108,7 @@ def main():
     print("\n")
     unicorn_draw(.5)
     print("\n")
-    #6. It should supply appropriate feedback so that the user knows how much money they have won / lost each round and how much money they have left.
+    #6. It should supply appropriate feedback so that the user knows how much money they have won / lost each round...
     global moneyEarnt
     moneyEarnt = moneyEarnt + moneyValues[token]
     print("You won ${}!".format(moneyValues[token]))
@@ -153,9 +153,16 @@ def main():
     askPlayAgain()
     
  #...provided they have not lost all of their money.
+
+  ##7. Once students have no more money, the game should end...
 while numberOfPlays > 0:
   main()
+  
+  
+  
   numberOfPlays -= 1
+   #...and how much money they have left.
+  print("You have {} plays left".format(numberOfPlays))
   
   
 
@@ -167,5 +174,5 @@ while numberOfPlays > 0:
  
 
 
-#7. Once students have no more money, the game should end (although players do have the option of quitting while they are ahead) 
+ 
 
